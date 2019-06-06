@@ -1,14 +1,17 @@
 const router = require('express').Router();
 
-router.get('/', async (req, res) => {
-  try {
-    const tracks = await Tracks.find();
-    res.status(200).json(tracks);
-  } catch (error) {
+const Tracks = require('./tracks-model.js');
+
+router.get('/', (req, res) => {
+   Tracks.find() //returns a promise ---before db('tracks') now: our routes don't need to know about the db, we can just call this model, which knows how to connect to the db.
+      .then(tracks => { //call .then on the promise and return tracks
+       res.status(200).json(tracks);
+   })
+    .catch(error => {
     res
-      .status(500)
-      .json({ message: 'We ran into an error retrieving the tracks' });
-  }
+        .status(500)
+        .json({ message: 'We ran into an error retrieving the tracks' })
+  });
 });
 
 router.get('/:id', async (req, res) => {

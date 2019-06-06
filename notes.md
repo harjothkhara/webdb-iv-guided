@@ -37,3 +37,8 @@ what you design, where the schema for the db is going to come from, where you de
 - the most important tools for data modeling: ears and pen and paper
 - one to many relationships translate to: Foreign Keys
 - where does the Foreign Key go? : on the many side
+
+## Model Slack
+
+- a user can be in several channels
+- a channel can have several participants
